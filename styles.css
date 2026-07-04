@@ -1,0 +1,861 @@
+/* ============================================================
+   NOTE: The watermark photo is now set directly in index.html
+   via the inline style="background-image: url('...')" attribute
+   on the .photo-watermark div — edit it there, not here.
+============================================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050a05;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===== ANIMATED NEON GREEN BACKGROUND ===== */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(57, 255, 20, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 200, 0.10) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(57, 255, 20, 0.05) 0%, transparent 50%),
+                #050a05;
+            z-index: -2;
+        }
+
+        /* ===== FLOATING NEON ORBS ===== */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: orbFloat 18s ease-in-out infinite alternate;
+        }
+
+        .orb-1 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(57, 255, 20, 0.25), rgba(57, 255, 20, 0)); top: -120px; left: -120px; animation-delay: 0s; }
+        .orb-2 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(0, 255, 200, 0.18), rgba(0, 255, 200, 0)); bottom: -100px; right: -100px; animation-delay: -6s; }
+        .orb-3 { width: 220px; height: 220px; background: radial-gradient(circle, rgba(182, 255, 0, 0.12), rgba(182, 255, 0, 0)); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -12s; }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -50px) scale(1.15); }
+            66% { transform: translate(-50px, 60px) scale(0.85); }
+            100% { transform: translate(60px, 40px) scale(1.05); }
+        }
+
+        /* ===== TWINKLING STARS ===== */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #39ff14;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #39ff14;
+            animation: twinkle 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.1; transform: scale(0.5); }
+            100% { opacity: 0.9; transform: scale(1.3); }
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            width: 100%;
+            max-width: 750px;
+            display: flex;
+            justify-content: center;
+            perspective: 1200px;
+        }
+
+        /* ============================================================
+               STYLISH NEON GREEN BUSINESS CARD WITH PHOTO WATERMARK
+            ============================================================ */
+        .business-card {
+            width: 100%;
+            padding: 25px 30px;
+            position: relative;
+            border-radius: 24px;
+            min-height: auto;
+
+            /* Glassmorphism with subtle pattern */
+            background: rgba(8, 12, 8, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            
+            /* Subtle grid pattern for style */
+            background-image: 
+                linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+            background-size: 25px 25px;
+
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(57, 255, 20, 0.12),
+                inset 0 0 80px rgba(57, 255, 20, 0.03);
+
+            border: 1px solid rgba(57, 255, 20, 0.10);
+
+            animation: cardEntry 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: perspective(800px) rotateY(-25deg) rotateX(8deg) scale(0.9) translateZ(-80px);
+            transition: box-shadow 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes cardEntry {
+            0% {
+                opacity: 0;
+                transform: perspective(800px) rotateY(-30deg) rotateX(12deg) scale(0.75) translateZ(-120px);
+                box-shadow: 0 0 0 rgba(57, 255, 20, 0);
+            }
+            60% {
+                opacity: 1;
+                transform: perspective(800px) rotateY(3deg) rotateX(-2deg) scale(1.02) translateZ(15px);
+                box-shadow: 0 0 80px rgba(57, 255, 20, 0.15), 0 0 150px rgba(57, 255, 20, 0.08);
+            }
+            100% {
+                opacity: 1;
+                transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1) translateZ(0);
+                box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(57, 255, 20, 0.12), inset 0 0 80px rgba(57, 255, 20, 0.03);
+            }
+        }
+
+        /* ===== ANIMATED GRADIENT BORDER ===== */
+        .card-border-glow {
+            position: absolute;
+            inset: -2px;
+            border-radius: 26px;
+            padding: 2px;
+            background: conic-gradient(from 0deg,
+                    transparent,
+                    rgba(57, 255, 20, 0.7),
+                    rgba(0, 255, 200, 0.7),
+                    rgba(182, 255, 0, 0.7),
+                    rgba(255, 0, 200, 0.5),
+                    rgba(57, 255, 20, 0.7),
+                    transparent);
+            background-size: 300% 300%;
+            animation: borderRotate 5s linear infinite;
+            z-index: -1;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* ===== GLOW OVERLAY ===== */
+        .card-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(57, 255, 20, 0.06), transparent 60%),
+                        radial-gradient(ellipse at 70% 80%, rgba(0, 255, 200, 0.04), transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+            animation: glowPulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* ===== STYLISH CORNER ACCENTS ===== */
+        .corner-accent {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(57, 255, 20, 0.25);
+            z-index: 3;
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+        .corner-accent.tl { top: 15px; left: 15px; border-right: none; border-bottom: none; border-radius: 4px 0 0 0; }
+        .corner-accent.tr { top: 15px; right: 15px; border-left: none; border-bottom: none; border-radius: 0 4px 0 0; }
+        .corner-accent.bl { bottom: 15px; left: 15px; border-right: none; border-top: none; border-radius: 0 0 0 4px; }
+        .corner-accent.br { bottom: 15px; right: 15px; border-left: none; border-top: none; border-radius: 0 0 4px 0; }
+
+        .business-card:hover .corner-accent {
+            border-color: rgba(57, 255, 20, 0.6);
+            width: 35px;
+            height: 35px;
+        }
+
+        /* ============================================================
+           📸 PHOTO WATERMARK
+           ============================================================
+           The image URL is set inline in index.html on this element's
+           style="background-image: url('...')" attribute.
+        ============================================================ */
+        .photo-watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.12;
+            z-index: 0;
+            border-radius: 24px;
+            filter: saturate(0.8) contrast(1.1);
+            transition: opacity 0.6s ease;
+            animation: watermarkPulse 6s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes watermarkPulse {
+            0% { opacity: 0.10; transform: scale(1); }
+            100% { opacity: 0.18; transform: scale(1.02); }
+        }
+
+        /* Overlay to ensure text readability */
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(5, 10, 5, 0.3) 0%, rgba(5, 10, 5, 0.7) 100%);
+            border-radius: 24px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== CARD CONTENT ===== */
+        .card-content {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .left-section {
+            width: 100%;
+        }
+
+        /* ===== HEADER (STYLISH TYPOGRAPHY) ===== */
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 22px;
+            animation: slideInLeft 0.8s ease-out 0.5s forwards;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        @keyframes slideInLeft {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .logo-wrapper {
+            position: relative;
+            margin-right: 18px;
+        }
+
+        .logo {
+            background: linear-gradient(135deg, #39ff14, #00f5a0);
+            color: #050a05;
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
+            transition: all 0.4s ease;
+            animation: logoFloat 5s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(57, 255, 20, 0.4), rgba(0, 255, 200, 0.4));
+            filter: blur(10px);
+            z-index: -1;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.15); }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(3deg); }
+        }
+
+        .logo:hover {
+            transform: scale(1.08) rotate(8deg);
+        }
+
+        .company-info h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #39ff14, #00f5a0, #b6ff00);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite alternate;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+            text-shadow: 0 0 40px rgba(57, 255, 20, 0.15);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .company-info p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+            font-weight: 400;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .company-info p::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #39ff14, #00f5a0);
+            border-radius: 2px;
+            animation: underlineExpand 1s ease-out 1s forwards;
+        }
+
+        @keyframes underlineExpand {
+            to { width: 60%; }
+        }
+
+        /* ===== INFO GRID ===== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .contact-info h3,
+        .services h3 {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .contact-info h3 i,
+        .services h3 i {
+            margin-right: 8px;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #39ff14, #00f5a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        /* ===== OWNER (STYLISH) ===== */
+        .owner-section {
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(57, 255, 20, 0.10);
+            animation: fadeIn 0.5s ease-out 0.9s forwards;
+            opacity: 0;
+            position: relative;
+        }
+        .owner-section::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, #39ff14, transparent);
+            border-radius: 2px;
+        }
+
+        .owner-name {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2px;
+        }
+
+        .owner-icon {
+            color: #39ff14;
+            margin-right: 8px;
+            font-size: 0.9rem;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.3));
+        }
+
+        .owner-text {
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .owner-title {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-left: 26px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* ===== CONTACT ITEMS (STYLISH) ===== */
+        .contact-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .contact-item:nth-child(1) { animation-delay: 1.1s; }
+        .contact-item:nth-child(2) { animation-delay: 1.3s; }
+        .contact-item:nth-child(3) { animation-delay: 1.5s; }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .contact-item:hover {
+            background: rgba(57, 255, 20, 0.06);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(57, 255, 20, 0.08);
+            border-radius: 6px;
+            margin-right: 10px;
+            color: #39ff14;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: rgba(57, 255, 20, 0.2);
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);
+        }
+
+        .contact-text {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.4;
+            transition: color 0.3s;
+            font-weight: 400;
+        }
+
+        .contact-item:hover .contact-text {
+            color: #ffffff;
+        }
+
+        /* ===== SERVICES (STYLISH CHIPS) ===== */
+        .service-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .service-item {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4px 14px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            animation: fadeInChip 0.5s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.8);
+            background: rgba(57, 255, 20, 0.06);
+            border: 1px solid rgba(57, 255, 20, 0.10);
+            font-weight: 500;
+            cursor: default;
+            letter-spacing: 0.3px;
+        }
+
+        .service-item:nth-child(1) { animation-delay: 1.2s; }
+        .service-item:nth-child(2) { animation-delay: 1.4s; }
+        .service-item:nth-child(3) { animation-delay: 1.6s; }
+        .service-item:nth-child(4) { animation-delay: 1.8s; }
+
+        @keyframes fadeInChip {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .service-item:hover {
+            background: rgba(57, 255, 20, 0.15);
+            border-color: rgba(57, 255, 20, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.10);
+        }
+
+        /* ===== FOOTER (STYLISH) ===== */
+        .card-footer {
+            width: 100%;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(57, 255, 20, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 2s forwards;
+            opacity: 0;
+        }
+
+        .tag {
+            background: linear-gradient(90deg, rgba(57, 255, 20, 0.12), rgba(0, 255, 200, 0.06));
+            color: #39ff14;
+            padding: 5px 18px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border: 1px solid rgba(57, 255, 20, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+        }
+
+        .tag i {
+            color: #39ff14;
+            font-size: 0.75rem;
+        }
+
+        .social {
+            display: flex;
+            gap: 8px;
+        }
+
+        .social a {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            text-decoration: none;
+        }
+
+        .social a:hover {
+            color: #050a05;
+            background: linear-gradient(135deg, #39ff14, #00f5a0);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(57, 255, 20, 0.25);
+            border-color: transparent;
+        }
+
+        /* ============================================================
+               RESPONSIVE
+            ============================================================ */
+        @media (max-width: 700px) {
+            .business-card {
+                padding: 20px 22px;
+                border-radius: 20px;
+            }
+            .card-content {
+                justify-content: center;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .company-info h2 {
+                font-size: 1.3rem;
+            }
+            .logo {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+            .card-border-glow {
+                border-radius: 20px;
+            }
+            .corner-accent { display: none; }
+            .contact-text, .service-item {
+                font-size: 0.75rem;
+            }
+            .contact-item {
+                padding: 3px 6px;
+            }
+            .service-item {
+                padding: 3px 12px;
+            }
+            .owner-text {
+                font-size: 0.85rem;
+            }
+            .owner-title {
+                font-size: 0.6rem;
+            }
+            .tag {
+                font-size: 0.6rem;
+                padding: 4px 12px;
+            }
+            .social a {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            .card-footer {
+                margin-top: 15px;
+                padding-top: 12px;
+            }
+            .photo-watermark {
+                opacity: 0.08;
+            }
+        }
+
+        @media (max-width: 450px) {
+            body {
+                padding: 10px;
+            }
+            .business-card {
+                padding: 16px 18px;
+                border-radius: 16px;
+            }
+            .card-header {
+                margin-bottom: 14px;
+            }
+            .company-info h2 {
+                font-size: 1.1rem;
+            }
+            .company-info p {
+                font-size: 0.6rem;
+            }
+            .logo {
+                width: 42px;
+                height: 42px;
+                font-size: 1.2rem;
+                margin-right: 12px;
+            }
+            .logo-wrapper {
+                margin-right: 12px;
+            }
+            .info-grid {
+                gap: 12px;
+            }
+            .contact-info h3, .services h3 {
+                font-size: 0.75rem;
+                margin-bottom: 8px;
+            }
+            .contact-item {
+                margin-bottom: 4px;
+            }
+            .service-item {
+                margin-bottom: 4px;
+                font-size: 0.65rem;
+                padding: 2px 10px;
+            }
+            .contact-text {
+                font-size: 0.7rem;
+            }
+            .contact-icon {
+                width: 18px;
+                height: 18px;
+                font-size: 0.6rem;
+                margin-right: 6px;
+            }
+            .owner-section {
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+            }
+            .owner-text {
+                font-size: 0.75rem;
+            }
+            .owner-title {
+                font-size: 0.55rem;
+                margin-left: 18px;
+            }
+            .owner-icon {
+                font-size: 0.7rem;
+                margin-right: 6px;
+            }
+            .card-footer {
+                margin-top: 12px;
+                padding-top: 10px;
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            .tag {
+                font-size: 0.55rem;
+                padding: 3px 10px;
+            }
+            .social {
+                gap: 6px;
+            }
+            .social a {
+                width: 26px;
+                height: 26px;
+                font-size: 0.7rem;
+            }
+            .card-border-glow {
+                border-radius: 14px;
+            }
+            .card-glow {
+                display: none;
+            }
+            .orb {
+                display: none;
+            }
+            .photo-watermark {
+                opacity: 0.06;
+                background-size: cover;
+            }
+            .photo-overlay {
+                background: radial-gradient(ellipse at center, rgba(5, 10, 5, 0.4) 0%, rgba(5, 10, 5, 0.8) 100%);
+            }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            body { background: white !important; }
+            .bg-gradient, .orb, .stars { display: none !important; }
+
+            .business-card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+                background: white !important;
+                backdrop-filter: none !important;
+                padding: 15px !important;
+            }
+
+            .card-border-glow, .card-glow, .photo-watermark, .photo-overlay {
+                display: none !important;
+            }
+
+            .company-info h2 {
+                -webkit-text-fill-color: #333 !important;
+                background: none !important;
+                color: #333 !important;
+                font-family: 'Inter', sans-serif;
+            }
+
+            .contact-text, .service-item, .owner-text,
+            .owner-title, .tag {
+                color: #333 !important;
+            }
+
+            .contact-info h3, .services h3 {
+                color: #555 !important;
+            }
+
+            .contact-info h3 i, .services h3 i {
+                -webkit-text-fill-color: #39ff14 !important;
+                color: #39ff14 !important;
+            }
+
+            .logo {
+                background: #eee !important;
+                color: #333 !important;
+            }
+            .logo::after { display: none !important; }
+
+            .social a {
+                color: #555 !important;
+                background: #f5f5f5 !important;
+                border-color: #ddd !important;
+            }
+
+            .tag {
+                background: #f5f5f5 !important;
+                border-color: #ddd !important;
+                color: #333 !important;
+            }
+
+            .contact-icon {
+                background: #f0f0f0 !important;
+                color: #39ff14 !important;
+            }
+
+            .service-item {
+                background: #f5f5f5 !important;
+                border-color: #ddd !important;
+            }
+            .corner-accent { display: none !important; }
+        }
