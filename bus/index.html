@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreNow Bus - Stylish Watermark Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ===== BACKGROUND ===== -->
+    <div class="bg-gradient"></div>
+
+    <!-- ===== NEON ORBS ===== -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- ===== STARS ===== -->
+    <div class="stars" id="stars"></div>
+
+    <!-- ===== CONTAINER ===== -->
+    <div class="container">
+
+        <!-- ===== BUSINESS CARD ===== -->
+        <div class="business-card">
+            <div class="card-border-glow"></div>
+            <div class="card-glow"></div>
+            
+            <!-- 
+            ============================================================
+            📸 WATERMARK IMAGE — EDITABLE RIGHT HERE
+            ============================================================
+            To change the watermark photo, just replace the URL inside
+            the style="background-image: url('...')" attribute below.
+
+            Recommended image size: 800x600px or larger
+            Supported formats: JPG, PNG, WEBP, SVG
+            ============================================================
+            -->
+            <div class="photo-watermark" style="background-image: url(pic1.png);"></div>
+            <div class="photo-overlay"></div>
+
+            <!-- Stylish Corner Accents -->
+            <div class="corner-accent tl"></div>
+            <div class="corner-accent tr"></div>
+            <div class="corner-accent bl"></div>
+            <div class="corner-accent br"></div>
+
+            <div class="card-content">
+
+                <!-- LEFT SECTION (Full width) -->
+                <div class="left-section">
+
+                    <!-- Header -->
+                    <div class="card-header">
+                        <div class="logo-wrapper">
+                            <div class="logo">
+                                <i class="fas fa-bus-alt"></i>
+                            </div>
+                        </div>
+                        <div class="company-info">
+                            <h2>ExploreNow Bus</h2>
+                            <p>Premium Tourist Services</p>
+                        </div>
+                    </div>
+
+                    <!-- Info Grid -->
+                    <div class="info-grid">
+
+                        <!-- Contact -->
+                        <div class="contact-info">
+                            <h3><i class="fas fa-address-card"></i> Contact</h3>
+
+                            <div class="owner-section">
+                                <div class="owner-name">
+                                    <i class="fas fa-user-tie owner-icon"></i>
+                                    <span class="owner-text">Mr. N Ramachandran</span>
+                                </div>
+                                <div class="owner-title">Owner; Managing Director</div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                                <div class="contact-text">+91 9443483472</div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="contact-text">naveen05@gmail.com</div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                                <div class="contact-text">explorenow.com</div>
+                            </div>
+                        </div>
+
+                        <!-- Services (Stylish Chips) -->
+                        <div class="services">
+                            <h3><i class="fas fa-concierge-bell"></i> Services</h3>
+                            <ul class="service-list">
+                                <li class="service-item">City Tours</li>
+                                <li class="service-item">Sightseeing</li>
+                                <li class="service-item">Hotel Pickup</li>
+                                <li class="service-item">Guided Trips</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="card-footer">
+                        <div class="tag">
+                            <i class="fas fa-clock"></i> 24/7 Service
+                        </div>
+                        <div class="social">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script src="script.js"></script>
+
+</body>
+</html>
