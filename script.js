@@ -47,4 +47,19 @@ $('#download').onclick=async()=>{
  }
 };
 
+
+function syncMobileCardScale(){
+ const deck=document.querySelector('.deck');
+ if(!deck)return;
+ if(innerWidth<=600){
+   // Fits 720px design canvas into viewport with ~16px safe margin each side.
+   const scale=Math.min((innerWidth-32)/720,(innerHeight-105)/570,.60);
+   deck.style.setProperty('--mobile-scale',Math.max(.40,scale).toFixed(4));
+ }else{
+   deck.style.removeProperty('--mobile-scale');
+ }
+}
+syncMobileCardScale();
+addEventListener('resize',syncMobileCardScale,{passive:true});
+addEventListener('orientationchange',()=>setTimeout(syncMobileCardScale,150),{passive:true});
 if(matchMedia('(pointer:fine)').matches){const deck=$('.deck');deck.addEventListener('mousemove',e=>{if(active)return;const r=deck.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;deck.style.transform=`rotateY(${x*2.5}deg) rotateX(${-y*2.5}deg)`});deck.addEventListener('mouseleave',()=>deck.style.transform='')}
