@@ -4,29 +4,14 @@
 .contactIntro h2{font-size:clamp(48px,6vw,82px);line-height:.9;letter-spacing:-.055em;margin:18px 0 24px}
 .contactIntro h2 em{font-style:normal;color:#6d28d9}.contactIntro p{font-size:12px;line-height:1.8;color:#665777;max-width:430px}
 .contactGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.contactItem{min-height:150px;padding:23px;border:1px solid #6d28d91f;border-radius:22px;background:#ffffffb8;text-decoration:none;color:#24123f;display:flex;flex-direction:column;justify-content:flex-end;transition:.3s;box-shadow:0 15px 40px #35136d0b}.contactItem:hover{transform:translateY(-5px);box-shadow:0 22px 50px #6d28d91d;border-color:#8b5cf655}.contactItem small{font-size:7px;letter-spacing:.22em;color:#6d28d9;font-weight:800;margin-bottom:auto}.contactItem b{font-size:clamp(14px,1.6vw,21px);overflow-wrap:anywhere}.contactItem span{font-size:8px;color:#806f91;margin-top:8px}
-.back-card-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.back-card-btn:hover {
+    background: #6D28D9;
+    border-color: #8B5CF6;
+    transform: translateY(-2px);
 
-    padding: 6px 10px;
-
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(196, 181, 253, 0.4);
-    border-radius: 20px;
-
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 10px;
-    font-weight: 600;
-
-    backdrop-filter: blur(10px);
-
-    /* No hover animation */
-    transition: none;
-}
-
-/* Mobile */
+    box-shadow:
+        0 8px 25px rgba(109, 40, 217, 0.4);
+}/* Mobile */
 @media (max-width: 600px) {
     .back-card-btn {
         padding: 5px 8px;
