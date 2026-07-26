@@ -8,7 +8,7 @@ let sx=0;car.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:t
 $('#startExplore').onclick=()=>$('#gallery').scrollIntoView({behavior:'smooth'});
 const lb=$('#lightbox'),lc=$('#lightContent');
 function openLight(i){lightIndex=i;drawLight();lb.classList.add('open')}
-function drawLight(){let [name,src]=items[lightIndex],img=new Image();document.getElementById("downloadBtn").href = src;lc.innerHTML='';img.src=src;img.alt=name;img.onload=()=>lc.replaceChildren(img);img.onerror=()=>lc.innerHTML=`<div class="ph">${name}<small>Add ${src}</small></div>`;lc.appendChild(img);$('#lbCaption').textContent=`${String(lightIndex+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')} — ${name.toUpperCase()}`}
+function drawLight(){let [name,src]=items[lightIndex],img=new Image();lc.innerHTML='';img.src=src;img.alt=name;img.onload=()=>lc.replaceChildren(img);img.onerror=()=>lc.innerHTML=`<div class="ph">${name}<small>Add ${src}</small></div>`;lc.appendChild(img);$('#lbCaption').textContent=`${String(lightIndex+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')} — ${name.toUpperCase()}`}
 $('#close').onclick=()=>lb.classList.remove('open');$('#lbPrev').onclick=()=>{lightIndex=(lightIndex-1+items.length)%items.length;drawLight()};$('#lbNext').onclick=()=>{lightIndex=(lightIndex+1)%items.length;drawLight()};lb.onclick=e=>{if(e.target===lb)lb.classList.remove('open')};addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open');if(lb.classList.contains('open')&&e.key==='ArrowRight')$('#lbNext').click();if(lb.classList.contains('open')&&e.key==='ArrowLeft')$('#lbPrev').click()});
 if(matchMedia('(pointer:fine)').matches){$('.visual').addEventListener('mousemove',e=>{let r=e.currentTarget.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;$('.heroCard').style.transform=`rotateY(${-13+x*7}deg) rotateX(${4-y*6}deg) rotateZ(2deg) translate(${x*8}px,${y*8}px)`});$('.visual').addEventListener('mouseleave',()=>$('.heroCard').style.transform='')}
 
@@ -23,42 +23,3 @@ if(matchMedia('(pointer:fine)').matches){$('.visual').addEventListener('mousemov
  if(c.email)mail.href='mailto:'+c.email+'?subject='+encodeURIComponent('21-Seater Coach Bus Booking Enquiry');
  document.querySelectorAll('[data-booking-link]').forEach(a=>a.addEventListener('click',e=>{if(!c.whatsapp){e.preventDefault();document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})}}));
 })();
-const downloadBtn = document.getElementById("downloadBtn");
-
-downloadBtn.onclick = function(e) {
-    e.preventDefault();
-
-    const a = document.createElement("a");
-    a.href = items[lightIndex][1];
-    a.download = items[lightIndex][0] + ".jpg";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-};
-const downloadBtn = document.getElementById("downloadBtn");
-
-downloadBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-
-    const [name, src] = items[lightIndex];
-
-    try {
-        const response = await fetch(src);
-        const blob = await response.blob();
-
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${name}.jpg`;
-
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        URL.revokeObjectURL(url);
-    } catch (err) {
-        console.error(err);
-        alert("Download failed!");
-    }
-});
