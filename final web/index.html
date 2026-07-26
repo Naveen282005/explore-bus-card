@@ -7,7 +7,10 @@
 
 <main>
 <section class="hero" id="explore"><div class="orb o1"></div><div class="orb o2"></div><div class="heroText"><span class="eyebrow">SHUN TOURS & TRAVELS</span><h1>EXPLORE<br><em>THE JOURNEY</em></h1><p>Discover our premium <b>21-Seater Coach Bus</b> through an immersive 3D visual experience.</p><div class="heroBtns"><button id="startExplore">Explore Bus ↓</button><a href="#" data-booking-link>Book via WhatsApp ↗</a></div></div>
-<div class="visual"><div class="ring r1"></div><div class="ring r2"></div><div class="heroCard"><div class="placeholder"><span>BUS HERO IMAGE</span><small>Add your main bus photo to assets/bus-1.jpg</small></div><div class="shine"></div></div><div class="floatTag"><b>21</b><span>SEATER<br>COACH BUS</span></div></div><div class="scroll">SCROLL TO EXPLORE <i></i></div></section>
+<div class="visual"><div class="ring r1"></div><div class="ring r2"></div><div class="heroCard">
+    <img src="assets/bus-1.jpg" alt="SHUN 21-Seater Coach Bus" class="heroImg">
+    <div class="shine"></div>
+</div><div class="floatTag"><b>21</b><span>SEATER<br>COACH BUS</span></div></div><div class="scroll">SCROLL TO EXPLORE <i></i></div></section>
 <section class="gallerySec" id="gallery"><div class="sectionHead"><span>IMMERSIVE GALLERY</span><h2>Every angle.<br><em>Every detail.</em></h2><p>Drag, swipe, or use the controls to explore the coach.</p></div>
 <div class="scene"><button class="arrow prev">‹</button><div class="carousel" id="carousel"></div><button class="arrow next">›</button></div><div class="counter"><b id="current">01</b><i></i><span id="total">06</span></div></section>
 <section class="details" id="details"><div><span>THE COACH</span><h2>Built for the<br><em>journey.</em></h2></div><div class="specs"><article><b>21</b><span>SEATER</span></article><article><b>360°</b><span>VISUAL EXPERIENCE</span></article><article><b>SHUN</b><span>TOURS & TRAVELS</span></article></div></section>
@@ -22,7 +25,21 @@
 </div></section>
 <section class="cta"><span>READY FOR YOUR NEXT JOURNEY?</span><h2>Travel together.<br><em>Remember forever.</em></h2><a href="#" data-booking-link>Book This Bus on WhatsApp ↗</a></section>
 </main>
-<div id="lightbox"><button id="close">×</button><button class="lbArrow" id="lbPrev">‹</button><div id="lightContent"></div><button class="lbArrow" id="lbNext">›</button><div id="lbCaption"></div></div>
+<div id="lightbox">
+    <button id="close">×</button>
+
+    <button class="lbArrow" id="lbPrev">‹</button>
+
+    <div id="lightContent"></div>
+
+    <button class="lbArrow" id="lbNext">›</button>
+
+    <a id="downloadBtn" href="#" download="SHUN-Bus.jpg">
+    ⬇ Download
+</a>
+
+    <div id="lbCaption"></div>
+</div>
 <script>
 /* =========================================================
    EDIT ONLY THESE BLANK DETAILS
